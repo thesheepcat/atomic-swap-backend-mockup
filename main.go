@@ -78,3 +78,61 @@ type recipientAddressAndAmount struct {
 	RecipientAddress string  `json:"RecipientAddress"`
 	Amount           float32 `json:"Amount"`
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+type buildContractOutput struct {
+  //if partecipate this will be an empty string
+  Secret              *string `json:"Secret"`
+  SecretHash          string  `json:"SecretHash"`
+  Contract            string  `json:"Contract"`
+  TxID                string  `json:"ContractTransactionID"`
+  Tx                  string  `json:"ContractTransaction"`
+  TxFee               string  `json:"TransactionFee"`
+}
+
+type buildContractInput struct {
+  Them        string  `json:"RecipientAddress"`
+  Amount      string  `json:"Amount"`
+  //if nil or empty string I'll initiate a conctract
+  //partecipate otherwise
+  SecretHash  *string `json:"secretHash"`
+}
+type spendContractOutput struct {
+  Tx  string `json:"SpendTransaction"`
+  TxID  string `json:"SpendTransactionID"`
+  TxFee    string `json:"TransactionFee"`
+}
+type spendContractInput struct {
+  //if nil or empty string I'll start refund
+  //redeem otherwise
+  Secret              *string `json:"Secret"`
+  Contract            string  `json:"Contract"`
+  Tx string  `json:"ContractTransaction"`
+}
+type auditContractInput struct {
+  Contract    string `json:"Contract"`
+  Tx  string `json:"ContractTx"`
+}
+type  auditContractOutput struct {
+  ContractAddress   string `json:"ContractAddress"`
+  //if I don't konw the address this is empty string
+  RecipientAddress  string `json:"RecipientAddress"`
+  Recipient2b       string `json:"RecipientBlake2b"`
+  Amount            string `json:"ContractAmount"`
+  //if I don't konw the address this is empty string
+  RefundAddress     string `json:"RefundAddress"`
+  Refund2b          string `json:"RefundBlake2b"`
+  SecretHash        string `json:"SecretHash"`
+  LockTime          string `json:"LockTime"`
+  TxId              string `json:"TxId"`
+  DaaScore          string `json:"DaaScore"`
+}
+type extractSecretInput struct {
+  Tx string `json:"Transaction"`
+  SecretHash string `json:"SecretHash"`
+}
+type extractSecretOutput struct {
+  Secret  string `json:"Secret"`
+}
